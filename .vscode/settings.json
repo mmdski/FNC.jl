@@ -1,0 +1,13 @@
+{
+  "editor.fontFamily": "JuliaMono, Menlo, Monaco, 'Courier New', monospace",
+  "terminal.integrated.fontFamily": "JuliaMono, Menlo, Monaco, 'Courier New', monospace",
+  "markdown.preview.fontFamily": "Lato, -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif",
+  "editor.wordWrap": "off",
+  "quarto.visualEditor.lineNumbers": true,
+  "quarto.visualEditor.markdownWrap": "sentence",
+  "python.terminal.activateEnvironment": false,
+  "cSpell.words": ["coloneqq", "mathbb", "mathrm"],
+  "[quarto]": {
+    "editor.wordWrap": "off"
+  }
+}
