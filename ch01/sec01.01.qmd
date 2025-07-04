@@ -1,0 +1,176 @@
+---
+title: "1.1 Floating-point numbers"
+editor:
+    render-on-save: true
+engine: julia
+---
+
+## Definition 1.1.1: Floating-point-numbers
+
+$$
+\pm\left(1 + f\right) \times 2^n
+$$
+
+$$
+f = \sum\limits_{i=1}^d b_i 2^{-i}, \qquad b_i \in \left\{0,1\right\}
+$$
+
+## Example 1.1.1
+
+$d = 2$, $n = 0$
+
+$$
+f = \sum\limits_{i=1}^2 b_i 2^{-i} = \frac{b_1}{2} + \frac{b_2}{4}
+$$
+
+| $\frac{b_1}{2}$ | $\frac{b_2}{4}$ |      $f$        |
+|-----------------|-----------------|-----------------|
+| $\frac{0}{2}$   | $\frac{0}{4}$   |  $\frac{0}{4}$  |
+| $\frac{0}{2}$   | $\frac{1}{4}$   |  $\frac{1}{4}$  |
+| $\frac{1}{2}$   | $\frac{0}{4}$   |  $\frac{2}{4}$  |
+| $\frac{1}{2}$   | $\frac{1}{4}$   |  $\frac{3}{4}$  |
+
+Since $n = 0$, $\pm\left(1 + f\right) \times 2^0 = \pm\left(1 + f\right)$.
+
+$$
+1 + \frac{0}{4},\:1 + \frac{1}{4},\:1 + \frac{2}{4},\:1 + \frac{3}{4}
+$$
+
+## Definition 1.1.2 (Machine epsilon)
+
+$$
+\epsilon_{\mathrm{mach}} = 2^{-d}
+$$
+
+- The rounding function $\mathrm{fl}(x)$ maps the real number $x$ to the nearest
+member of $\mathbb{F}$.
+- The relative error of the mapping is
+
+  $$
+  \frac{\lvert\mathrm{fl}(x) - x\rvert}{\lvert x\rvert}
+  $$
+
+  and the maximum relative error is
+
+  $$
+  \frac{2^{n-d-1}}{2^n}
+  $$
+
+- Since dividing by $2^n$ gives the _maximum_ relative error, the error is
+bounded
+
+  $$
+  \frac{\lvert\mathrm{fl}(x) - x\rvert}{\lvert x\rvert} \le \frac{2^{n-d-1}}{2^n}
+  $$
+
+- The maximum relative error is equal to one-half of the machine precision.
+
+  $$
+  \frac{2^{n-d-1}}{2^n} = 2^{n-d-1-n} = 2^{-1}2^{-d} = \dfrac{1}{2}\epsilon_{\mathrm{mach}}
+  $$
+
+- Therefore,
+
+  $$
+  \frac{\lvert\mathrm{fl}(x) - x\rvert}{\lvert x\rvert} \le \frac{2^{n-d-1}}{2^n}
+   = \dfrac{1}{2}\epsilon_{\mathrm{mach}}
+  $$
+
+## Demo 1.1.4
+```{julia}
+@show p = 22 / 7;
+```
+
+```{julia}
+@show float(π);
+```
+
+```{julia}
+acc = abs(p - π);
+println("absolute accuracy = $acc")
+println("relative accuracy = $(acc/π)")
+```
+
+```{julia}
+println("Number of accurate digits = $(-log10(acc/π))")
+```
+
+### Demo 1.1.5
+
+```{julia}
+@show typeof(1);
+@show typeof(1.0);
+```
+
+```{julia}
+bitstring(1.0)
+```
+
+```{julia}
+[bitstring(1.0), bitstring(-1.0)]
+```
+
+```{julia}
+[bitstring(1.0), bitstring(2.0)]
+```
+
+```{julia}
+x = 1.0
+@show sign(x), exponent(x), significand(x);
+```
+
+```{julia}
+x = 0.125
+@show sign(x), exponent(x), significand(x);
+```
+
+```{julia}
+eps()
+```
+
+```{julia}
+-log2(eps())
+```
+
+```{julia}
+eps(1.618)
+```
+
+```{julia}
+eps(161.8)
+```
+
+```{julia}
+ans = nextfloat(161.8)
+ans
+```
+
+```{julia}
+ans - 161.8
+```
+
+```{julia}
+@show floatmin(), floatmax();
+```
+
+```{julia}
+1 / 7
+```
+
+```{julia}
+37.3 + 1
+```
+
+```{julia}
+2^(-4)
+```
+
+## Demo 1.1.6
+```{julia}
+e = eps() / 2
+(1.0 + e) - 1.0
+```
+
+```{julia}
+1.0 + (e - 1.0)
+```

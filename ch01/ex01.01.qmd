@@ -1,0 +1,291 @@
+---
+title: "1.1 Exercises"
+editor:
+    render-on-save: true
+engine: julia
+---
+
+1. Consider a floating-point set $\mathbb{F}$ defined by
+$\pm\left(1+f\right)\times 2^n$ and
+$f = \sum^d_\limits{i=1}b_i2^{-i}$ with $d=4$.
+
+    With $d=4$, the summation becomes,
+
+    $$
+    f = \sum^4_\limits{i=1}b_i2^{-i} = \frac{b_1}{2} + \frac{b_2}{4} + \frac{b_3}{8} + \frac{b_4}{16}
+    $$
+
+    Expanding the possible values of $b_i$ into a table to compute the values of $f$:
+
+    | $\frac{b_1}{2}$ | $\frac{b_2}{4}$ | $\frac{b_3}{8}$ | $\frac{b_4}{16}$ |       $f$       |
+    |-----------------|-----------------|-----------------|------------------|-----------------|
+    |  $\frac{0}{2}$  |  $\frac{0}{4}$  |  $\frac{0}{8}$  |  $\frac{0}{16}$  |  $\frac{0}{16}$ |
+    |  $\frac{0}{2}$  |  $\frac{0}{4}$  |  $\frac{0}{8}$  |  $\frac{1}{16}$  |  $\frac{1}{16}$ |
+    |  $\frac{0}{2}$  |  $\frac{0}{4}$  |  $\frac{1}{8}$  |  $\frac{0}{16}$  |  $\frac{2}{16}$ |
+    |  $\frac{0}{2}$  |  $\frac{0}{4}$  |  $\frac{1}{8}$  |  $\frac{1}{16}$  |  $\frac{3}{16}$ |
+    |  $\frac{0}{2}$  |  $\frac{1}{4}$  |  $\frac{0}{8}$  |  $\frac{0}{16}$  |  $\frac{4}{16}$ |
+    |  $\frac{0}{2}$  |  $\frac{1}{4}$  |  $\frac{0}{8}$  |  $\frac{1}{16}$  |  $\frac{5}{16}$ |
+    |  $\frac{0}{2}$  |  $\frac{1}{4}$  |  $\frac{1}{8}$  |  $\frac{0}{16}$  |  $\frac{6}{16}$ |
+    |  $\frac{0}{2}$  |  $\frac{1}{4}$  |  $\frac{1}{8}$  |  $\frac{1}{16}$  |  $\frac{7}{16}$ |
+    |  $\frac{1}{2}$  |  $\frac{0}{4}$  |  $\frac{0}{8}$  |  $\frac{0}{16}$  |  $\frac{8}{16}$ |
+    |  $\frac{1}{2}$  |  $\frac{0}{4}$  |  $\frac{0}{8}$  |  $\frac{1}{16}$  |  $\frac{9}{16}$ |
+    |  $\frac{1}{2}$  |  $\frac{0}{4}$  |  $\frac{1}{8}$  |  $\frac{0}{16}$  | $\frac{10}{16}$ |
+    |  $\frac{1}{2}$  |  $\frac{0}{4}$  |  $\frac{1}{8}$  |  $\frac{1}{16}$  | $\frac{11}{16}$ |
+    |  $\frac{1}{2}$  |  $\frac{1}{4}$  |  $\frac{0}{8}$  |  $\frac{0}{16}$  | $\frac{12}{16}$ |
+    |  $\frac{1}{2}$  |  $\frac{1}{4}$  |  $\frac{0}{8}$  |  $\frac{1}{16}$  | $\frac{13}{16}$ |
+    |  $\frac{1}{2}$  |  $\frac{1}{4}$  |  $\frac{1}{8}$  |  $\frac{0}{16}$  | $\frac{14}{16}$ |
+    |  $\frac{1}{2}$  |  $\frac{1}{4}$  |  $\frac{1}{8}$  |  $\frac{1}{16}$  | $\frac{15}{16}$ |
+
+    (a) How many elements of $\mathbb{F}$ are there in the real interval
+    $\left[1/2,4\right]$, including the endpoints?
+
+    With $n=-1$:
+
+    $$
+    \frac{1}{2} + \frac{0}{32},\:\frac{1}{2} + \frac{1}{32},\dots,\frac{1}{2} + \frac{15}{32}
+    $$
+
+    $n=0$:
+
+    $$
+    1 + \frac{0}{16},\:1 + \frac{1}{16},\dots,1 + \frac{15}{16}
+    $$
+
+    $n=1$:
+
+    $$
+    2 + \frac{0}{8},\:2 + \frac{1}{8},\dots,2 + \frac{15}{8}
+    $$
+
+    $n=2$:
+
+    $$
+    4 + \frac{0}{4}
+    $$
+
+    Each range of values from $n=-1$ to $n=1$ contains 16 elements. There is a
+    single value at $n=2$. Therefore, there are $3\times16+1 = 49$ elements.
+
+    (b) What is the element $\mathbb{F}$ closest to the real number
+    $1/10$? (Hint: Find the interval $\left[2^n, 2^{n+1}\right)$
+    that contains $1/10$, then enumerate all the candidates in
+    $\mathbb{F}$.)
+
+    $n = -4$
+
+    $$
+    \frac{1}{16} + \frac{0}{256},\:\frac{1}{16}+\frac{1}{256},\dots,\frac{1}{16}+\frac{255}{256}
+    $$
+
+    The closest element is
+
+    $$
+    \frac{1}{16} + \frac{10}{256} = 0.1015625
+    $$
+
+    which is closer than
+
+    $$
+    \frac{1}{16} + \frac{9}{256} = 0.09765625.
+    $$
+
+    (c) What is the smallest positive integer not in $\mathbb{F}$?
+    Hint: For what value of the exponent does the spacing between
+    floating-point numbers become larger than 1?)
+
+    The spacing of the floating point numbers is
+
+    $$
+    \frac{1}{16}\times 2^n
+    $$
+
+    Finding an $n$ with $\frac{1}{16}\times 2^n \gt 1$ gives
+
+    $$
+    \log_2\frac{2^n}{16} \gt \log_2{1}
+    $$
+
+    $$
+    n - 4 \gt 0
+    $$
+
+    $$
+    n \gt 4
+    $$
+
+    $$
+    \implies n = 5
+    $$
+
+    Verifying
+
+    $$
+    \frac{1}{16} \times 2^5 = \frac{1}{16} \times 32 = 2
+    $$
+
+    The smallest positive integer not in $\mathbb{F}$ will be between $i=0$ and
+    $i=1$ for $n=5$:
+
+    $$
+    \left(1 + \frac{0}{16}\right) \times 32 = 32
+    $$
+
+    $$
+    \left(1 + \frac{1}{16}\right) \times 32 = 34
+    $$
+
+    Therefore, the smallest positive integer not in $\mathbb{F}$ is 33.
+
+2. Prove that @eq-1.1.5 is equivalent to @eq-1.1.6. This means showing first
+that @eq-1.1.5 implies @eq-1.1.6, and then separately that @eq-1.1.6 implies
+@eq-1.1.5.
+
+    $$
+    \frac{\lvert\mathrm{fl}(x)-x\rvert}{\lvert x\rvert} \le \frac{2^{n-d-1}}{2^n} =
+        \dfrac{1}{2}\epsilon_{\mathrm{mach}}
+    $$ {#eq-1.1.5}
+
+    $$
+    \mathrm{fl}(x) = x\left(1+\epsilon\right)\text{ for some } \lvert\epsilon\rvert
+        \le \dfrac{1}{2}\epsilon_{\mathrm{mach}}
+    $$ {#eq-1.1.6}
+
+    Show @eq-1.1.5 implies @eq-1.1.6.
+
+    Define $\epsilon$ such that
+
+    $$
+    \epsilon := \frac{\mathrm{fl}(x) - x}{x}.
+    $$
+
+    Therefore,
+
+    $$
+    \frac{\mathrm{fl}(x) - x}{x} = \epsilon
+    $$
+
+    $$
+    \mathrm{fl}(x) = x\left(1 + \epsilon\right)
+    $$
+
+    $$
+    \frac{\lvert\mathrm{fl}(x)-x\rvert}{\lvert x\rvert} \le \frac{1}{2}\epsilon_{\mathrm{mach}}
+    \implies \lvert\epsilon\rvert \le \dfrac{1}{2}\epsilon_{\mathrm{mach}}
+    $$
+
+    $$
+    \implies \mathrm{fl}(x) = x\left(1+\epsilon\right)\text{ for some } \lvert\epsilon\rvert
+        \le \dfrac{1}{2}\epsilon_{\mathrm{mach}}
+    $$
+
+    Show @eq-1.1.6 implies @eq-1.1.5.
+
+    Rearranging @eq-1.1.6 gives
+
+    $$
+    \frac{\mathrm{f}(x)-x}{x} = \epsilon
+    $$
+
+    Since
+
+    $$
+    \lvert\epsilon\rvert \le \dfrac{1}{2}\epsilon_{\mathrm{mach}},
+    $$
+
+    therefore
+
+    $$
+    \frac{\lvert\mathrm{f}(x)-x\rvert}{\lvert x\rvert} \le \dfrac{1}{2}\epsilon_{\mathrm{mach}}.
+    $$
+
+3. Find the absolute and relative accuracy of the following rational
+approximations to $\pi$. Also find the number of accurate digits, rounding down
+to an integer.
+
+    (a) 355/113
+
+```{julia}
+acc = abs(355 / 113 - π)
+println("absolute accuracy = $acc")
+println("relative accuracy = $(acc/π)")
+println("Number of accurate digits = $(floor(Int, -log10(acc/π)))")
+```
+
+
+    (b) 103638/32989
+
+```{julia}
+acc = abs(103638 / 32989 - π)
+println("absolute accuracy = $acc")
+println("relative accuracy = $(acc/π)")
+println("Number of accurate digits = $(floor(Int, -log10(acc/π)))")
+```
+
+4. IEEE 75 **single precision** specifies that 23 binary bits are used for the
+value $f$ in the significand $1 + f$ in
+
+    $$
+    f = \sum\limits_{i=1}^d b_i 2^{-i}, \qquad b_i \in \left\{0,1\right\}.
+    $$
+
+    Because they need less storage space and can be operated on more quickly than
+    double-precision values, single-precision values can be useful in low-precision
+    applications.
+
+    (a) In base-10 terms, what is the first single-precision number greater than 1
+    in this system?
+
+    The first single-precision number greater than one is
+
+    $$
+    1 + \frac{1}{2^{23}} = 1 + \frac{1}{8388608}
+    $$
+
+    (b) What is the smallest positive integer that is not a single-precision
+    number?
+
+    The spacing of the floating point numbers is
+
+    $$
+    \frac{1}{2^{23}} \times 2^n
+    $$
+
+    Finding an $n$ for $\frac{1}{2^{23}} \times 2^n > 1$
+
+    $$
+    n > 23 \implies n = 24.
+    $$
+
+    This number is in the range
+
+    $$
+    \left[(1 + \frac{0}{2^{23}})2^{24}, (1 + \frac{1}{2^{23}})2^{24}\right]
+    $$
+
+    $$
+    \left[16777216, 16777218\right]
+    $$
+
+    The smallest positive integer that is not a single-precision number is
+    16,777,217.
+
+```{julia}
+@show Int(Float32(16777216));
+@show Int(Float32(16777217));
+@show Int(Float32(16777218));
+```
+
+5. Julia defines a function `nextfloat` that gives the next-larger floating-
+point value of a given number.
+
+- What is the next float past `floatmax()`?
+
+```{julia}
+nextfloat(floatmax())
+```
+
+- What is the next float past `-Inf`?
+
+```{julia}
+nextfloat(-Inf)
+```
