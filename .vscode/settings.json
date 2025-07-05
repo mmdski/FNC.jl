@@ -6,7 +6,14 @@
   "quarto.visualEditor.lineNumbers": true,
   "quarto.visualEditor.markdownWrap": "sentence",
   "python.terminal.activateEnvironment": false,
-  "cSpell.words": ["coloneqq", "mathbb", "mathrm"],
+  "cSpell.words": [
+    "coloneqq",
+    "infty",
+    "L'Hôpital's",
+    "mathbb",
+    "mathrm",
+    "operatorname"
+  ],
   "[quarto]": {
     "editor.wordWrap": "off"
   }

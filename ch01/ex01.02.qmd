@@ -1,0 +1,346 @@
+---
+title: "1.2 Exercises"
+editor:
+    render-on-save: true
+---
+
+1. Use @eq-1.2.6 to derive the relative condition numbers of the following
+functions.
+
+$$
+\kappa_f(x) = \left|\frac{xf'(x)}{f(x)}\right|
+$$ {#eq-1.2.6}
+
+(a) $f(x) = x^p$
+
+$$
+f'(x) = p x^{p-1}
+$$
+
+$$
+\kappa_f(x) = \left|\frac{xf'(x)}{f(x)}\right| = \left|\frac{x \cdot px^{p-1}}{x^p}\right|
+$$
+
+$$
+\kappa_f(x) = \left|p\right|
+$$
+
+(b) $f(x) = \log(x)$
+
+$$
+f'(x) = \frac{1}{x}
+$$
+
+$$
+\kappa_f(x) = \left|\frac{xf'(x)}{f(x)}\right| = \left|\frac{x}{x\log(x)}\right|
+$$
+
+$$
+\kappa_f(x) = \frac{1}{\left|\log(x)\right|}
+$$
+
+(c) $f(x) = \cos(x)$
+
+$$
+f'(x) = -\sin(x)
+$$
+
+$$
+\kappa_f(x) = \left|\frac{xf'(x)}{f(x)}\right| = \left|\frac{x\sin(x)}{\cos(x)}\right|
+$$
+
+$$
+\kappa_f(x) = \left|x\tan(x)\right|
+$$
+
+(d) $f(x) = e^x$
+
+$$
+f'(x) = e^x
+$$
+
+$$
+\kappa_f(x) = \left|\frac{xf'(x)}{f(x)}\right| = \left|\frac{xe^x}{e^x}\right|
+$$
+
+$$
+\kappa_f(x) = \left|x\right|
+$$
+
+2. Use the chain rule @eq-1.2.9 to find the relative condition number of the
+given function. Then check your result by applying @eq-1.2.6 directly.
+
+$$
+\kappa_h(x) = \kappa_f(g(x)) \cdot \kappa_g(x)
+$$ {#eq-1.2.9}
+
+(a) $f(x) = \sqrt{x + 5}$
+
+Let
+
+$$
+g(x) = x + 5
+$$
+
+so
+
+$$
+f(g(x)) = \sqrt{g(x)}.
+$$
+
+$$
+f'(g(x)) = \frac{1}{2\sqrt{g(x)}}
+$$
+
+$$
+\kappa_f(g(x)) = \left|\frac{g(x)f'(g(x))}{f(g(x))}\right| = \left|\frac{g(x)}{2g(x)}\right|
+$$
+
+$$
+\kappa_f(g(x)) = \left|\frac{1}{2}\right|
+$$
+
+$$
+g'(x) = 1
+$$
+
+$$
+\kappa_g(x) = \left|\frac{xg'(x)}{g(x)}\right| = \left|\frac{x}{x + 5}\right|
+$$
+
+$$
+\boxed{\kappa_h(x) = \left|\frac{1}{2}\frac{x}{x+5}\right|}
+$$
+
+Checking with @eq-1.2.6
+
+$$
+f'(x) = \dfrac{1}{2}(x+5)^{-1/2}
+$$
+
+$$
+\kappa_f(x) = \left|\frac{xf'(x)}{f(x)}\right|
+$$
+
+$$
+\boxed{\kappa_f(x) = \left|\frac{1}{2}\frac{x}{x+5}\right|}
+$$
+
+(b) $f(x) = \cos(2\pi x)$
+
+Let
+
+$$
+g(x) = 2\pi x
+$$
+
+$$
+h(x) = f(g(x)) = \cos(g(x))
+$$
+
+$$
+f'(g(x)) = -\sin(g(x))
+$$
+
+$$
+\kappa_f(g(x)) = \left|\frac{g(x)\sin(g(x))}{cos(g(x))}\right| =
+    \left|g(x)\tan(g(x))\right|
+$$
+
+$$
+g'(x) = 2\pi
+$$
+
+$$
+\kappa_g = \left|\frac{x2\pi}{2\pi x}\right| = 1
+$$
+
+$$
+\boxed{\kappa_h = \left|2\pi x\tan(2\pi x)\right|}
+$$
+
+$$
+f'(x) = -2\pi \sin(2\pi x)
+$$
+
+$$
+\kappa_f = \left|\frac{2\pi x\sin(2\pi x)}{\cos(2\pi x)}\right|
+$$
+
+$$
+\boxed{\kappa_f = \left|2\pi x\tan(2\pi x)\right|}
+$$
+
+(c) $f(x) = e^{-x^2}$
+
+Let
+
+$$
+g(x) = -x^2
+$$
+
+$$
+g'(x) = -2x
+$$
+
+$$
+h(x) = f(g(x)) = e^{g(x)}
+$$
+
+$$
+f'(g(x)) = e^{g(x)}
+$$
+
+$$
+\kappa_f(g(x)) = \left|\frac{g(x)e^{g(x)}}{e^{g(x)}}\right|
+$$
+
+$$
+\boxed{\kappa_h = \left|2x^2\right|}
+$$
+
+$$
+f'(x) = -2xe^{-x^2}
+$$
+
+$$
+\kappa_f = \left|\frac{xf'(x)}{f(x)}\right| = \left|\frac{2x^2e^{-x^2}}{e^{-x^2}}\right|
+$$
+
+$$
+\boxed{\kappa_f = \left|2x^2\right|}
+$$
+
+3. Calculate the relative condition number of each function, and identify all
+values of x at which $\kappa_f(x) \to \infty$ (including limits as
+$x\to\pm\infty$).
+
+(a) $f(x)=\tanh(x)$
+
+$$
+f'(x) = 1 - \tanh^2(x)
+$$
+
+$$
+\kappa_f(x) = \left|\frac{xf'(x)}{f(x)}\right| = \left|\frac{x - x\tanh^2(x)}{\tanh(x)}\right|
+$$
+
+Simplifying yields
+
+$$
+\frac{x - x\tanh^2(x)}{\tanh(x)} = \frac{x}{\tanh(x)} - x\tanh(x).
+$$
+
+Checking near $x \to 0$,
+
+$$
+\lim_{x\to 0}\frac{x - x\tanh^2(x)}{\tanh(x)} = \lim_{x\to 0}\frac{x}{\tanh(x)} - \lim_{x\to 0}x\tanh(x)
+$$
+
+Using L'Hôpital's Rule for the first term on the right:
+
+$$
+\lim_{x\to 0}\frac{x}{\tanh(x)} = \lim_{x\to 0}\frac{1}{1 - \tanh^2(x)} = \frac{1}{1 - 0^2} = 1
+$$
+
+And for the second term on the right:
+
+$$
+\lim_{x\to 0}x\tanh(x) = 0
+$$
+
+Therefore,
+
+$$
+\kappa_f(0) = 1
+$$
+
+and $\kappa_f$ does not approach $\infty$ near $0$.
+
+As $x \to \infty$,
+
+$$
+\lim_{x\to \infty}\frac{x\left(1 - \tanh^2(x)\right)}{\tanh(x)} =
+    \lim_{x\to \infty}\frac{x\operatorname{sech}^2(x)}{\tanh(x)}
+$$
+
+The numerator can be written as
+
+$$
+x\operatorname{sech}^2(x) = \frac{x}{\cosh^2(x)}.
+$$
+
+Taking the limit of $\frac{1}{\tanh(x)}$ as $x\to\infty$
+
+$$
+\lim_{x\to\infty}\frac{1}{\tanh(x)} = \frac{1}{1} = 1
+$$
+
+Taking the limit of the numerator as $x\to\infty$, again using L'Hôpital's rule
+
+$$
+\lim_{x\to\infty}\frac{x}{\cosh^2(x)} = \lim_{x\to\infty}\frac{1}{2\cosh(x)\sinh(x)} = 0
+$$
+
+Therefore,
+
+$$
+\lim_{x\to \infty}\frac{x\left(1 - \tanh^2(x)\right)}{\tanh(x)} =
+    \lim_{x\to \infty}\frac{x\operatorname{sech}^2(x)}{\tanh(x)} =
+    0 \cdot 1 = 0
+$$
+
+As $x\to\infty$, $\kappa_f\to 0$ and does not approach $\infty$.
+
+(b) $f(x) = \frac{e^x-1}{x}$
+
+$$
+f'(x) = \frac{d}{dx}\left(e^x - 1\right)x^{-1} =
+    e^x x^{-1} - \left(e^x - 1\right)x^{-2} =
+    \frac{xe^x}{x^2} - \frac{e^x - 1}{x^2}
+$$
+
+$$
+f'(x) = \frac{e^x\left(x - 1\right) + 1}{x^2}
+$$
+
+$$
+\begin{align}
+\kappa_f = & \left|\frac{xf'(x)}{f(x)}\right| \\
+ = & \left|\frac{e^x\left(x - 1\right) + 1}{e^x-1}\right|
+\end{align}
+$$
+
+As $x\to 0$
+
+$$
+\lim_{x\to 0}\frac{e^x\left(x - 1\right) + 1}{e^x-1} =
+    \frac{e^0\left(0 - 1\right) + 1}{e^0-1} = \frac{0}{0}
+$$
+
+Using L'Hôpital's rule
+
+$$
+\frac{d}{dx}e^x\left(x-1\right) + 1= e^x\left(x-1\right) + e^x =
+    xe^x
+$$
+
+$$
+\frac{d}{dx}e^x - 1 = e^x
+$$
+
+$$
+\lim_{x\to 0}\frac{xe^x}{e^x} = \lim_{x\to 0} x = 0
+$$
+
+As $x\to\infty$, continuing with the result of L'Hôpital's rule above
+
+$$
+\lim_{x\to\infty}x = \infty
+$$
+
+The result will be similar for $x\to-\infty$.
+
+Therefore, $\kappa_f\to\infty$ as $x\to\infty$ and $x\to-\infty$.
+
+(c) $f(x) = \frac{1 - \cos(x)}{x}$
